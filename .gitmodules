@@ -1,0 +1,3 @@
+[submodule "RAN/aurora"]
+	path = RAN/aurora
+	url = https://github.com/whitedevil-iith/aurora.git

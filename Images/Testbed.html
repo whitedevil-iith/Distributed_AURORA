@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1100" font-family="Arial, Helvetica, sans-serif">
+  <!-- 
+    ============================================================
+    O-RAN TESTBED ARCHITECTURE — EDITABLE DIAGRAM
+    ============================================================
+    HOW TO EDIT:
+    1. Open this file in Inkscape, Illustrator, or any text editor.
+    2. Search for "________" to find all NIC placeholder fields.
+    3. Replace each "________" with your actual NIC MAC/IP address.
+    4. Save the file.
+    
+    NIC SPEEDS:
+    - DU1, DU2, CU: 3 NICs each → 2x 10G + 1x 1G
+    - RIC, CN: 1 NIC each → 1x 1G
+    ============================================================
+  -->
+  <defs>
+    <pattern id="pipe10g" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+      <rect width="10" height="10" fill="#FF8F00"/>
+      <rect width="5" height="10" fill="#FFB300"/>
+    </pattern>
+    <marker id="arrowBlk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1500" height="1100" fill="#f8f9fb"/>
+
+  <text x="750" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1a1a2e">O-RAN Testbed Architecture</text>
+  <text x="750" y="64" text-anchor="middle" font-size="14" fill="#666">OAI RAN · OAI Core Network · NearRT-RIC · MAAS · Ansible · Kubernetes Multi-Node Cluster</text>
+
+  <!-- CAMPUS NETWORK -->
+  <rect x="510" y="85" width="280" height="36" rx="8" fill="#E8EAF6" stroke="#7986CB" stroke-width="1.2"/>
+  <text x="650" y="108" text-anchor="middle" font-size="14" font-weight="bold" fill="#283593">Campus Network / Internet</text>
+
+  <!-- DATA CENTER -->
+  <rect x="900" y="80" width="320" height="100" rx="10" fill="#455A64" stroke="#37474F" stroke-width="1.5"/>
+  <text x="1060" y="108" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Data Center Servers</text>
+  <text x="1060" y="126" text-anchor="middle" font-size="11" fill="#B0BEC5">(Part of campus network — private, isolated)</text>
+  <text x="1060" y="144" text-anchor="middle" font-size="11" fill="#CFD8DC">Can run: CN, CU, RIC, SMO, Non/Near-RT RIC</text>
+  <text x="1060" y="162" text-anchor="middle" font-size="10" fill="#90A4AE">Reachable by adding IP routing rules</text>
+  <line x1="900" y1="110" x2="790" y2="103" stroke="#78909C" stroke-width="1.5"/>
+  <text x="850" y="98" font-size="9" fill="#78909C">Campus Net</text>
+
+  <!-- MAAS / ANSIBLE CONTROLLER -->
+  <rect x="520" y="148" width="310" height="100" rx="10" fill="#2E7D32" stroke="#1B5E20" stroke-width="1.5"/>
+  <text x="675" y="174" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">MAAS &amp; Ansible Controller</text>
+  <text x="675" y="194" text-anchor="middle" font-size="11" fill="#C8E6C9">K8s Control Plane · DHCP · PXE Boot · NAT</text>
+  <text x="675" y="212" text-anchor="middle" font-size="11" fill="#C8E6C9">eth0: Campus | eth1: 172.16.10.1/24</text>
+  <text x="675" y="236" text-anchor="middle" font-size="11" fill="#A5D6A7">NIC1: ________    NIC2: ________</text>
+  <line x1="675" y1="148" x2="675" y2="121" stroke="#7986CB" stroke-width="2" marker-end="url(#arrowBlk)"/>
+  <text x="690" y="138" font-size="9" fill="#666">eth0</text>
+  <line x1="675" y1="248" x2="675" y2="292" stroke="#388E3C" stroke-width="2.5"/>
+  <text x="690" y="275" font-size="9" fill="#388E3C">eth1</text>
+
+  <!-- 48-PORT MANAGED SWITCH -->
+  <rect x="180" y="292" width="800" height="52" rx="10" fill="#1565C0" stroke="#0D47A1" stroke-width="1.5"/>
+  <text x="580" y="316" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">48-Port Managed Switch</text>
+  <text x="580" y="334" text-anchor="middle" font-size="10" fill="#BBDEFB">VLAN10 (Control) · VLAN20 (Experiment) · VLAN30 (Monitoring) · Data collection · Spare ports for expansion</text>
+
+  <!-- K8S BOUNDARY -->
+  <rect x="50" y="360" width="910" height="270" rx="16" fill="#E3F2FD" fill-opacity="0.25" stroke="#1976D2" stroke-width="2" stroke-dasharray="10 5"/>
+  <text x="700" y="600" font-size="14" font-weight="bold" fill="#1976D2">☸ Kubernetes Multi-Node Cluster</text>
+  <text x="660" y="620" font-size="10" fill="#1976D2">(Controller = K8s control plane; all workstations = worker nodes)</text>
+
+  <!-- O-DU 1 (GPU, 2x10G + 1x1G) -->
+  <rect x="68" y="420" width="170" height="160" rx="10" fill="#E65100" stroke="#BF360C" stroke-width="1.5"/>
+  <text x="153" y="444" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">O-DU 1 (GPU)</text>
+  <text x="153" y="462" text-anchor="middle" font-size="10" fill="#FFE0B2">OAI gNB-DU + O-DU-PHY</text>
+  <text x="153" y="478" text-anchor="middle" font-size="10" fill="#FFE0B2">3 NICs (2×10G + 1×1G) · AVX2</text>
+  <line x1="80" y1="488" x2="226" y2="488" stroke="#BF360C" stroke-width="0.5"/>
+  <text x="153" y="506" text-anchor="middle" font-size="10" fill="#FFF3E0">NIC1 (10G): ________</text>
+  <text x="153" y="522" text-anchor="middle" font-size="10" fill="#FFF3E0">NIC2 (10G): ________</text>
+  <text x="153" y="538" text-anchor="middle" font-size="10" fill="#FFF3E0">NIC3 (1G):  ________</text>
+  <line x1="80" y1="548" x2="226" y2="548" stroke="#BF360C" stroke-width="0.3"/>
+  <text x="153" y="564" text-anchor="middle" font-size="9" fill="#FFCC80">10G NIC → O-RU fronthaul</text>
+  <text x="153" y="576" text-anchor="middle" font-size="9" fill="#FFCC80">IP: ________</text>
+  <line x1="153" y1="420" x2="340" y2="344" stroke="#E65100" stroke-width="1.8"/>
+  <text x="210" y="378" font-size="9" fill="#E65100">1G mgmt</text>
+
+  <!-- O-DU 2 (GPU, 2x10G + 1x1G) -->
+  <rect x="256" y="420" width="170" height="160" rx="10" fill="#E65100" stroke="#BF360C" stroke-width="1.5"/>
+  <text x="341" y="444" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">O-DU 2 (GPU)</text>
+  <text x="341" y="462" text-anchor="middle" font-size="10" fill="#FFE0B2">OAI gNB-DU + O-DU-PHY</text>
+  <text x="341" y="478" text-anchor="middle" font-size="10" fill="#FFE0B2">3 NICs (2×10G + 1×1G) · AVX2</text>
+  <line x1="268" y1="488" x2="414" y2="488" stroke="#BF360C" stroke-width="0.5"/>
+  <text x="341" y="506" text-anchor="middle" font-size="10" fill="#FFF3E0">NIC1 (10G): ________</text>
+  <text x="341" y="522" text-anchor="middle" font-size="10" fill="#FFF3E0">NIC2 (10G): ________</text>
+  <text x="341" y="538" text-anchor="middle" font-size="10" fill="#FFF3E0">NIC3 (1G):  ________</text>
+  <line x1="268" y1="548" x2="414" y2="548" stroke="#BF360C" stroke-width="0.3"/>
+  <text x="341" y="564" text-anchor="middle" font-size="9" fill="#FFCC80">10G NIC → O-RU fronthaul</text>
+  <text x="341" y="576" text-anchor="middle" font-size="9" fill="#FFCC80">IP: ________</text>
+  <line x1="341" y1="420" x2="440" y2="344" stroke="#E65100" stroke-width="1.8"/>
+  <text x="355" y="378" font-size="9" fill="#E65100">1G mgmt</text>
+
+  <!-- O-CU (CPU, 2x10G + 1x1G) -->
+  <rect x="444" y="420" width="170" height="160" rx="10" fill="#4A148C" stroke="#311B92" stroke-width="1.5"/>
+  <text x="529" y="444" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">O-CU (CPU)</text>
+  <text x="529" y="462" text-anchor="middle" font-size="10" fill="#E1BEE7">OAI gNB-CU</text>
+  <text x="529" y="478" text-anchor="middle" font-size="10" fill="#E1BEE7">3 NICs (2×10G + 1×1G) · AVX2</text>
+  <line x1="456" y1="488" x2="602" y2="488" stroke="#311B92" stroke-width="0.5"/>
+  <text x="529" y="506" text-anchor="middle" font-size="10" fill="#F3E5F5">NIC1 (10G): ________</text>
+  <text x="529" y="522" text-anchor="middle" font-size="10" fill="#F3E5F5">NIC2 (10G): ________</text>
+  <text x="529" y="538" text-anchor="middle" font-size="10" fill="#F3E5F5">NIC3 (1G):  ________</text>
+  <line x1="456" y1="548" x2="602" y2="548" stroke="#311B92" stroke-width="0.3"/>
+  <text x="529" y="564" text-anchor="middle" font-size="9" fill="#CE93D8">10G NIC → switch uplink</text>
+  <text x="529" y="576" text-anchor="middle" font-size="9" fill="#CE93D8">IP: ________</text>
+  <!-- CU 10G PIPE to switch -->
+  <rect x="525" y="345" width="14" height="76" rx="3" fill="url(#pipe10g)" stroke="#E65100" stroke-width="1"/>
+  <text x="548" y="394" font-size="10" font-weight="bold" fill="#E65100">10G</text>
+
+  <!-- NEAR-RT RIC (GPU, 1x1G) -->
+  <rect x="632" y="420" width="170" height="140" rx="10" fill="#E65100" stroke="#BF360C" stroke-width="1.5"/>
+  <text x="717" y="444" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Near-RT RIC (GPU)</text>
+  <text x="717" y="462" text-anchor="middle" font-size="10" fill="#FFE0B2">FlexRIC</text>
+  <text x="717" y="478" text-anchor="middle" font-size="10" fill="#FFE0B2">1 NIC (1×1G) · AVX2</text>
+  <line x1="644" y1="488" x2="790" y2="488" stroke="#BF360C" stroke-width="0.5"/>
+  <text x="717" y="508" text-anchor="middle" font-size="10" fill="#FFF3E0">NIC1 (1G): ________</text>
+  <line x1="644" y1="520" x2="790" y2="520" stroke="#BF360C" stroke-width="0.3"/>
+  <text x="717" y="540" text-anchor="middle" font-size="9" fill="#FFCC80">IP: ________</text>
+  <line x1="717" y1="420" x2="660" y2="344" stroke="#E65100" stroke-width="1.8"/>
+  <text x="690" y="378" font-size="9" fill="#E65100">1G</text>
+
+  <!-- CORE NETWORK (CPU, 1x1G) -->
+  <rect x="820" y="420" width="130" height="140" rx="10" fill="#4A148C" stroke="#311B92" stroke-width="1.5"/>
+  <text x="885" y="444" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Core Network</text>
+  <text x="885" y="462" text-anchor="middle" font-size="10" fill="#E1BEE7">OAI CN (AMF, SMF,</text>
+  <text x="885" y="476" text-anchor="middle" font-size="10" fill="#E1BEE7">UPF, NRF, AUSF)</text>
+  <text x="885" y="492" text-anchor="middle" font-size="10" fill="#E1BEE7">1 NIC (1×1G) · AVX2</text>
+  <line x1="832" y1="502" x2="938" y2="502" stroke="#311B92" stroke-width="0.5"/>
+  <text x="885" y="522" text-anchor="middle" font-size="10" fill="#F3E5F5">NIC1 (1G): ________</text>
+  <line x1="832" y1="534" x2="938" y2="534" stroke="#311B92" stroke-width="0.3"/>
+  <text x="885" y="550" text-anchor="middle" font-size="9" fill="#CE93D8">IP: ________</text>
+  <line x1="885" y1="420" x2="780" y2="344" stroke="#4A148C" stroke-width="1.8"/>
+  <text x="838" y="378" font-size="9" fill="#4A148C">1G</text>
+
+  <!-- O-RU 1 + 10G FRONTHAUL -->
+  <rect x="40" y="660" width="140" height="80" rx="10" fill="#C62828" stroke="#B71C1C" stroke-width="1.5"/>
+  <text x="110" y="686" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">O-RU 1</text>
+  <text x="110" y="704" text-anchor="middle" font-size="10" fill="#FFCDD2">Tephosis 5G</text>
+  <text x="110" y="720" text-anchor="middle" font-size="10" fill="#FFCDD2">Base Station</text>
+  <line x1="76" y1="660" x2="76" y2="638" stroke="#E53935" stroke-width="2.5"/>
+  <line x1="66" y1="646" x2="76" y2="632" stroke="#E53935" stroke-width="2"/>
+  <line x1="86" y1="646" x2="76" y2="632" stroke="#E53935" stroke-width="2"/>
+  <line x1="60" y1="652" x2="76" y2="632" stroke="#E53935" stroke-width="1.2"/>
+  <line x1="92" y1="652" x2="76" y2="632" stroke="#E53935" stroke-width="1.2"/>
+  <rect x="113" y="582" width="16" height="76" rx="4" fill="url(#pipe10g)" stroke="#BF360C" stroke-width="1"/>
+  <text x="138" y="625" font-size="10" font-weight="bold" fill="#E65100">10G</text>
+  <text x="138" y="640" font-size="9" fill="#E65100">Fronthaul</text>
+
+  <!-- O-RU 2 + 10G FRONTHAUL -->
+  <rect x="260" y="660" width="140" height="80" rx="10" fill="#C62828" stroke="#B71C1C" stroke-width="1.5"/>
+  <text x="330" y="686" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">O-RU 2</text>
+  <text x="330" y="704" text-anchor="middle" font-size="10" fill="#FFCDD2">Tephosis 5G</text>
+  <text x="330" y="720" text-anchor="middle" font-size="10" fill="#FFCDD2">Base Station</text>
+  <line x1="296" y1="660" x2="296" y2="638" stroke="#E53935" stroke-width="2.5"/>
+  <line x1="286" y1="646" x2="296" y2="632" stroke="#E53935" stroke-width="2"/>
+  <line x1="306" y1="646" x2="296" y2="632" stroke="#E53935" stroke-width="2"/>
+  <line x1="280" y1="652" x2="296" y2="632" stroke="#E53935" stroke-width="1.2"/>
+  <line x1="312" y1="652" x2="296" y2="632" stroke="#E53935" stroke-width="1.2"/>
+  <rect x="333" y="582" width="16" height="76" rx="4" fill="url(#pipe10g)" stroke="#BF360C" stroke-width="1"/>
+  <text x="358" y="625" font-size="10" font-weight="bold" fill="#E65100">10G</text>
+  <text x="358" y="640" font-size="9" fill="#E65100">Fronthaul</text>
+
+  <!-- UE ZONE -->
+  <rect x="30" y="775" width="460" height="95" rx="12" fill="#FCE4EC" stroke="#E53935" stroke-width="1.2" stroke-dasharray="6 3"/>
+  <text x="260" y="800" text-anchor="middle" font-size="14" font-weight="bold" fill="#B71C1C">User Equipment Zone</text>
+  <rect x="55" y="814" width="120" height="40" rx="8" fill="#fff" stroke="#E53935" stroke-width="1"/>
+  <text x="115" y="834" text-anchor="middle" font-size="11" fill="#C62828">Commercial</text>
+  <text x="115" y="848" text-anchor="middle" font-size="11" fill="#C62828">5G UEs</text>
+  <rect x="195" y="814" width="130" height="40" rx="8" fill="#fff" stroke="#E53935" stroke-width="1"/>
+  <text x="260" y="834" text-anchor="middle" font-size="11" fill="#C62828">USRP B210 UEs</text>
+  <text x="260" y="848" text-anchor="middle" font-size="9" fill="#999">(lower sampling rate)</text>
+  <rect x="345" y="814" width="126" height="40" rx="8" fill="#fff" stroke="#E53935" stroke-width="1"/>
+  <text x="408" y="834" text-anchor="middle" font-size="11" fill="#C62828">Future B210</text>
+  <text x="408" y="848" text-anchor="middle" font-size="11" fill="#C62828">UE Expansion</text>
+  <line x1="110" y1="740" x2="115" y2="814" stroke="#E53935" stroke-width="1" stroke-dasharray="5 4"/>
+  <line x1="330" y1="740" x2="260" y2="814" stroke="#E53935" stroke-width="1" stroke-dasharray="5 4"/>
+  <text x="60" y="768" font-size="9" fill="#E53935">5G NR Air Interface</text>
+
+  <!-- EXPANSION ZONE -->
+  <rect x="1020" y="310" width="380" height="190" rx="12" fill="#E8F5E9" stroke="#43A047" stroke-width="1.2" stroke-dasharray="6 3"/>
+  <text x="1210" y="340" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E7D32">Expansion Zone</text>
+  <text x="1210" y="358" text-anchor="middle" font-size="11" fill="#388E3C">Additional workstations, B210 UEs,</text>
+  <text x="1210" y="374" text-anchor="middle" font-size="11" fill="#388E3C">generic compute for future testbeds</text>
+  <rect x="1045" y="395" width="100" height="55" rx="8" fill="#fff" stroke="#66BB6A" stroke-width="1.2" stroke-dasharray="4 2"/>
+  <text x="1095" y="420" text-anchor="middle" font-size="11" fill="#66BB6A">WS N+1</text>
+  <text x="1095" y="436" text-anchor="middle" font-size="9" fill="#A5D6A7">NIC: ________</text>
+  <rect x="1160" y="395" width="100" height="55" rx="8" fill="#fff" stroke="#66BB6A" stroke-width="1.2" stroke-dasharray="4 2"/>
+  <text x="1210" y="420" text-anchor="middle" font-size="11" fill="#66BB6A">WS N+2</text>
+  <text x="1210" y="436" text-anchor="middle" font-size="9" fill="#A5D6A7">NIC: ________</text>
+  <rect x="1275" y="395" width="100" height="55" rx="8" fill="#fff" stroke="#66BB6A" stroke-width="1.2" stroke-dasharray="4 2"/>
+  <text x="1325" y="420" text-anchor="middle" font-size="11" fill="#66BB6A">WS N+3</text>
+  <text x="1325" y="436" text-anchor="middle" font-size="9" fill="#A5D6A7">NIC: ________</text>
+  <text x="1210" y="486" text-anchor="middle" font-size="10" fill="#388E3C">Connected to 48-port switch (spare ports)</text>
+  <line x1="1020" y1="380" x2="980" y2="326" stroke="#43A047" stroke-width="2" stroke-dasharray="6 3"/>
+  <text x="1010" y="350" font-size="10" fill="#43A047">To Switch</text>
+
+  <!-- FUTURE EXTENSIONS -->
+  <rect x="1020" y="540" width="380" height="100" rx="12" fill="#FFF3E0" stroke="#FF9800" stroke-width="1.2" stroke-dasharray="6 3"/>
+  <text x="1210" y="568" text-anchor="middle" font-size="14" font-weight="bold" fill="#E65100">Future O-RAN Extensions</text>
+  <text x="1210" y="588" text-anchor="middle" font-size="11" fill="#F57C00">SMO · Non-RT RIC · Extended Near-RT RIC</text>
+  <text x="1210" y="608" text-anchor="middle" font-size="11" fill="#F57C00">On existing workstations or data center servers</text>
+  <text x="1210" y="628" text-anchor="middle" font-size="10" fill="#FF9800">Extendable O-RAN architecture</text>
+
+  <!-- SOFTWARE STACK -->
+  <rect x="530" y="680" width="460" height="65" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="1"/>
+  <text x="760" y="704" text-anchor="middle" font-size="13" font-weight="bold" fill="#0D47A1">Software Stack</text>
+  <text x="760" y="722" text-anchor="middle" font-size="10" fill="#1565C0">OAI RAN (gNB-CU, gNB-DU, O-DU-PHY) · OAI Core Network (AMF, SMF, UPF, NRF, AUSF)</text>
+  <text x="760" y="736" text-anchor="middle" font-size="10" fill="#1565C0">FlexRIC (Near-RT RIC) · MAAS · Ansible · Kubernetes · Prometheus · Grafana</text>
+
+  <!-- AVX2 NOTE -->
+  <rect x="530" y="760" width="460" height="42" rx="8" fill="#FFF8E1" stroke="#F9A825" stroke-width="1"/>
+  <text x="760" y="780" text-anchor="middle" font-size="11" fill="#F57F17">All workstations: AVX2 CPU instruction set</text>
+  <text x="760" y="796" text-anchor="middle" font-size="10" fill="#F57F17">O-DU-PHY code modified: AVX512 intrinsics → baseref AVX2 functions</text>
+
+  <!-- NIC SPEED SUMMARY -->
+  <rect x="530" y="818" width="460" height="50" rx="8" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1"/>
+  <text x="760" y="838" text-anchor="middle" font-size="12" font-weight="bold" fill="#4A148C">NIC Interface Summary</text>
+  <text x="760" y="856" text-anchor="middle" font-size="11" fill="#6A1B9A">DU1, DU2, CU: 2× 10G NIC + 1× 1G NIC  |  RIC, CN: 1× 1G NIC</text>
+
+  <!-- IP ADDRESSING -->
+  <rect x="530" y="884" width="460" height="70" rx="8" fill="#E8EAF6" stroke="#5C6BC0" stroke-width="1"/>
+  <text x="760" y="906" text-anchor="middle" font-size="13" font-weight="bold" fill="#283593">IP Addressing (DHCP via MAAS)</text>
+  <text x="760" y="924" text-anchor="middle" font-size="11" fill="#3949AB">Control / MAAS: 172.16.10.0/24</text>
+  <text x="760" y="940" text-anchor="middle" font-size="11" fill="#3949AB">Experiment: 172.16.20.0/24  ·  Monitoring: 172.16.30.0/24</text>
+  <text x="760" y="956" text-anchor="middle" font-size="10" fill="#3949AB">PXE Boot over IPv4 on LAN · NAT to campus for external access</text>
+
+  <!-- LEGEND -->
+  <rect x="30" y="975" width="940" height="110" rx="10" fill="#fff" stroke="#ddd" stroke-width="1"/>
+  <text x="500" y="998" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Legend</text>
+  <rect x="60" y="1012" width="30" height="14" rx="3" fill="url(#pipe10g)" stroke="#BF360C" stroke-width="0.8"/>
+  <text x="100" y="1025" font-size="11" fill="#333">10 Gbps Link (Fronthaul / CU Uplink)</text>
+  <rect x="380" y="1012" width="30" height="14" rx="4" fill="#E65100"/>
+  <text x="420" y="1025" font-size="11" fill="#333">GPU Workstation (DU / RIC)</text>
+  <rect x="680" y="1012" width="30" height="14" rx="4" fill="#4A148C"/>
+  <text x="720" y="1025" font-size="11" fill="#333">CPU Workstation (CU / CN)</text>
+  <rect x="60" y="1040" width="30" height="14" rx="4" fill="#C62828"/>
+  <text x="100" y="1053" font-size="11" fill="#333">O-RU (Tephosis 5G Base Station)</text>
+  <rect x="380" y="1040" width="30" height="14" rx="4" fill="#1976D2" fill-opacity="0.2" stroke="#1976D2" stroke-width="1.2" stroke-dasharray="4 2"/>
+  <text x="420" y="1053" font-size="11" fill="#333">Kubernetes Cluster Boundary</text>
+  <line x1="680" y1="1047" x2="710" y2="1047" stroke="#E53935" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="720" y="1053" font-size="11" fill="#333">5G NR Wireless Air Interface</text>
+  <text x="60" y="1076" font-size="10" fill="#999">To edit: open in Inkscape or any text editor → search "________" → replace with your NIC MAC/IP values → save</text>
+</svg>
+
+

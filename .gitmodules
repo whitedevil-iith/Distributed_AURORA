@@ -4,9 +4,6 @@
 [submodule "AURORA_Blocks/1_RootCauseAnalysis/smo/o1"]
 	path = AURORA_Blocks/1_RootCauseAnalysis/smo/o1
 	url = https://gerrit.o-ran-sc.org/r/smo/o1
-[submodule "AURORA_Blocks/1_RootCauseAnalysis/o2"]
-	path = AURORA_Blocks/1_RootCauseAnalysis/o2
-	url = https://gerrit.o-ran-sc.org/r/smo/o2
 [submodule "AURORA_Blocks/1_RootCauseAnalysis/smo/o2"]
 	path = AURORA_Blocks/1_RootCauseAnalysis/smo/o2
 	url = https://gerrit.o-ran-sc.org/r/smo/o2

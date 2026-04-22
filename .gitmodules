@@ -7,3 +7,6 @@
 [submodule "AURORA_Blocks/1_RootCauseAnalysis/smo/o2"]
 	path = AURORA_Blocks/1_RootCauseAnalysis/smo/o2
 	url = https://gerrit.o-ran-sc.org/r/smo/o2
+[submodule "Motivation/ns-3-allinone"]
+	path = Motivation/ns-3-allinone
+	url = https://gitlab.com/nsnam/ns-3-allinone.git

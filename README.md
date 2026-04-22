@@ -739,3 +739,43 @@ The RAN data collection effort follows a phased plan with approximate timelines 
    - Update the README or experiment notes with any additional fault cases and timing guidance.
 
 Total estimated effort: approximately 2 weeks
+
+
+## Distributed Approach Action Plan
+
+This project will pursue a distributed anomaly detection and resolution architecture that keeps lightweight detection on CU/DU edge nodes while centralizing heavier analysis and explanation.
+
+### Engineering Workstreams
+
+- Model Selection for CU and DU anomaly detection
+  - Evaluate separate edge models for CU and DU to reflect their distinct telemetry profiles and RAN responsibilities.
+- Code for Online Learning on side-car container
+  - Build a sidecar inference pipeline that can run locally on CU/DU, ingest live AURORA telemetry, and update models online.
+- Synchronization of D-apps to report the data when anomaly detected
+  - Define a shared alert schema and synchronization markers so distributed edge apps can report aligned context when anomalies occur.
+- Anomaly Reporting framework to a central location
+  - Implement a central reporting service that receives edge alerts, stores synchronized event windows, and provides cross-node context for RCA.
+- RCA integration for synchronized and collected window
+  - Ensure the central RCA pipeline consumes synchronized edge and collected data windows so causal reasoning uses aligned, comparable evidence.
+
+### Research Workstreams
+
+- Empirical proving that traffic patterns are different in Rural Vs Urban as motivation for distributed approach using ns-3 simulations
+  - Prove that rural and urban traffic patterns differ because of population density, urbanization (building distribution), mobility (roads), and related factors.
+  - Use population density datasets to simulate urban and rural UE distributions.
+  - Incorporate OpenStreetMap (OSM) building data into ns-3 via new building modules.
+  - Use OSM and SUMO to simulate UE mobility on realistic road networks.
+- Designing Anomaly detection model
+  - Research and choose models suitable for CU and DU telemetry, including edge-friendly sequence and distribution detectors.
+- Designing a RCA method or decide to use one of the existing RCA methods
+  - Evaluate existing root cause analysis frameworks and select or adapt one that fits the distributed synchronized window model.
+- Explanation module using LLM (plain or RAG)
+  - Prototype explanation generation that uses LLMs, optionally with retrieval-augmented generation, to turn RCA outputs into operator-ready narratives.
+- Multi-agent framework for fault resolution before it cascades into a failure
+  - Define planner, reasoning, validator, and executioner agents that collaborate with operators to contain faults safely.
+
+### Goals
+
+- Validate distributed edge detection with strong rural vs urban motivation.
+- Keep edge anomaly detection lightweight while enabling central causal reasoning and explanation.
+- Provide a clear workflow from CU/DU detection through centralized RCA, explanation, and operator-guided resolution.

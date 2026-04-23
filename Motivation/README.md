@@ -23,7 +23,8 @@ Traffic and anomaly behavior are not uniform across deployment environments. In 
 These differences motivate a distributed architecture because:
 
 - rural and urban edge nodes will have different telemetry profiles
-- we could also explore how different configuration of e2 nodes would lead to different telemetry profiles.
+- **we could also explore how different configuration of e2 nodes would lead to different telemetry profiles.**
+    (Very Important)
 - a single centralized detector cannot optimally serve both edge domains,
 - localized CU/DU models are better suited to their deployment-specific conditions,
 - central RCA can still unify the results and explain cross-domain failures.

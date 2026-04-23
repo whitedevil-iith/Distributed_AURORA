@@ -20,10 +20,10 @@ Exposes live RAN state snapshot to external observers through single
 
   Thread metrics subsystem (aurora_thread):
   ─────────────────────────────────────────
-  /proc/self/task/  ──► aurora_thread_proc.c  ─┐
+  /proc/self/task/  ──► aurora_thread_proc.c   ─┐
   (procfs fallback)     (polling collector)     │
                                                 ├─► thread_stats[]
-  sched_switch eBPF ──► aurora_thread_ebpf.c  ─┘   in shared memory
+  sched_switch eBPF ──► aurora_thread_ebpf.c   ─┘   in shared memory
   (nanosecond res.)     (BPF map merge agent)
                               │
                     aurora_thread_registry.c  — discover / whitelist / allocate slots
